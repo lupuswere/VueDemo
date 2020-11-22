@@ -1,0 +1,14 @@
+<div id="app">
+    <h1>{{title}}</h1>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                title: 'Hello world'
+            }
+        }
+    }
+    Vue.createApp(app).mount('#app')
+</script>
