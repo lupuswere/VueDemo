@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 自定义组件v-model -->
+    <custom-screen v-model="text"></custom-screen>
+    <br>
+    <!-- 原生元素v-model -->
+    <input type="text" v-model="text">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = Vue.createApp({
+        data () {
+            return {
+                text: ''
+            }
+        }
+    });
+    app.component('custom-screen', {
+        props: ['modelValue'],
+        methods: {
+            handleReset () {
+                console.log('重置为\'\'');
+                this.$emit('update:modelValue', ''); //使用$emit发送update:modelValue事件，并将目标值作为参数传出
+            }
+        },
+        template: `
+                <div>
+                    <h2>输入值为：{{ value }}</h2>
+                    <button @click="handleReset">重置为空</button>
+                </div>
+        `
+    });
+    app.mount('#app');
+</script>
+</body>
+</html>
