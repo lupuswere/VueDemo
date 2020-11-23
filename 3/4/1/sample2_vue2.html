@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h3>单项下拉选择框</h3>
+    <select v-model="singleSelect">
+        <!-- 如果没有设置value，则option节点的文本值会被当做value值 -->
+        <option value="汉代">汉代</option>
+        <option>唐代</option>
+    </select>
+    <p>{{ singleSelect }}</p>
+    <h3>多项下拉选择框</h3>
+    <select multiple v-model="multiSelect">
+        <!-- 按住ctrl键，可执行多选 -->
+        <option value=1>出身寒微</option>
+        <option value=2>饱受争议</option>
+        <option :value=3>结局悲凉</option> <!-- 想一想，为什么？ -->
+    </select>
+    <p>{{ multiSelect.join(',') }}</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#app',
+        data () {
+            return {
+                singleSelect: '唐代', // 根据value设置默认选择项
+                multiSelect: [1, 3]
+            }
+        }
+    });
+</script>
+</body>
+</html>
