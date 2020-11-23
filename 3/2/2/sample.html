@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .color-gray { color: gray; }
+    .size-18 { font-size: 18px; }
+    .style-italic { font-style: italic; }
+</style>
+<div id="app">
+    <p class="color-gray size-18 style-italic">《Vue3.0 从入门到实战》，用心良苦，伴你成长</p>
+    <p :class="classStr">《Vue3.0 从入门到实战》，用心良苦，伴你成长</p>
+    <p :class="classArr">《Vue3.0 从入门到实战》，用心良苦，伴你成长</p>
+    <p :class="classObj1">《Vue3.0 从入门到实战》，用心良苦，伴你成长</p>
+    <p :class="classObj2">《Vue3.0 从入门到实战》，用心良苦，伴你成长</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                classStr: 'color-gray size-18 style-italic',
+                classArr: ['color-gray', 'size-18', 'style-italic'],
+                classObj1: {
+                    'color-gray': true,
+                    'size-18': true,
+                    'style-italic': true
+                },
+                classObj2: {
+                    'color-gray': 0,
+                    'size-18': '',
+                    'style-italic': false
+                }
+            }
+        }
+    };
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
