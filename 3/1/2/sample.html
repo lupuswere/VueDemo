@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .align-center {
+        text-align: center;
+    }
+</style>
+<div id="app" style="width: 800px;margin: 0 auto;">
+    <div>{{ blog }}</div>
+    <hr>
+    <div v-html="blog"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    let app = {
+        data () {
+            return {
+                blog: `<h2 class="align-center">一对"兄弟"</h2>
+<div class="align-center"><img src="http://img.hb.aicdn.com/76c310ae6a6c6166343a23821078d379367f003e2088d-xWozMi_fw658">
+</div><p>你看他们多像一对兄弟啊，虽然是一只呆呆兔和一只傻傻猫蹲在了一起，但谁又能说他们不是兄弟呢？</p>`
+            }
+        }
+    }
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
