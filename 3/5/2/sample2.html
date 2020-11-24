@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>用户列表</h2>
+    <ul>
+        <!-- index作为第二个参数，用以标识下标 -->
+        <li v-for="(user, index) in users">
+            用户{{ index + 1 }}
+            <ul>
+                <!-- key作为第二个参数，用以标识键名 -->
+                <li v-for="(value, key) of user">{{ key }}:&nbsp;{{ value }}</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                users: [
+                    {
+                        name: 'Clark',
+                        age: 27,
+                        city: 'Chicago'
+                    },
+                    {
+                        name: 'Jackson',
+                        age: 28,
+                        city: 'Sydney'
+                    }
+                ]
+            }
+        }
+    };
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
