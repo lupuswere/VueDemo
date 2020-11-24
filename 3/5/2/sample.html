@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div style="float: left; width: 160px;">
+        <h2>用户列表</h2>
+        <ul>
+            <!-- index作为第二个参数，用以标识下标 -->
+            <li v-for="(item, index) in users">{{ index }}.&nbsp;{{ item.name }}</li>
+        </ul>
+    </div>
+    <div style="margin-left: 170px;overflow: hidden"> <!--BFC-->
+        <h2>用户列表</h2>
+        <ul>
+            <!-- uIndex作为第二个参数，用以标识下标 -->
+            <li v-for="(user, uIndex) of users">{{ uIndex }}.&nbsp;{{ user.name }}</li>
+        </ul>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                users: [
+                    {
+                        name: 'Clark',
+                        age: 27,
+                        city: 'Chicago'
+                    },
+                    {
+                        name: 'Jackson',
+                        age: 28,
+                        city: 'Sydney'
+                    }
+                ]
+            }
+        }
+    };
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
