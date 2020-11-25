@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .btn {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px 12px;
+    }
+
+    .btn-text {
+        color: #409eff;
+        background-color: transparent;
+    }
+
+    .btn-text:hover {
+        color: #66b1ff;
+    }
+</style>
+<div id="app">
+    <!-- 将实例中fields & goods传入组件 -->
+    <fly-table :fields="fields" :goods="goods">
+        <span slot="title">Fly Table Component</span>
+    </fly-table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    let h = Vue.h;
+    const app = Vue.createApp({
+        data() {
+            return {
+                fields: [
+                    {
+                        label: '名称',
+                        prop: 'name'
+                    },
+                    {
+                        label: '数量',
+                        prop: 'quantity'
+                    },
+                    {
+                        label: '价格',
+                        prop: 'price'
+                    },
+                    {
+                        label: '',
+                        prop: 'operate'
+                    }
+                ],
+                goods: [
+                    {
+                        name: '苹果',
+                        quantity: 200,
+                        price: 6.8,
+                        isMarked: false
+                    },
+                    {
+                        name: '西瓜',
+                        quantity: 50,
+                        price: 4.8,
+                        isMarked: false
+                    },
+                    {
+                        name: '榴莲',
+                        quantity: 0,
+                        price: 22.8,
+                        isMarked: false
+                    }
+                ]
+            }
+        }
+    });
+    app.component('fly-table', {
+        props: {
+            fields: {
+                type: Array,
+                default() {
+                    return []
+                }
+            },
+            goods: {
+                type: Array,
+                default() {
+                    return []
+                }
+            }
+        },
+        methods: {
+            reverse() {
+                this.goods.reverse();
+            }
+        },
+        render() {
+            return h('div', {
+                // 作为子组件时的插槽名称
+                slot: 'fly-table'
+            }, [
+                h('h2', this.$slots.title),
+                h('button', {
+                    // class用于绑定类名，同v-bind:class的绑定方式
+                    class: ['btn', 'btn-text'],
+                    // attrs 用于绑定节点一般属性，如id, disabled, title等
+                    attrs: {
+                        disabled: false,
+                        title: '点击使数组倒序'
+                    },
+                    innerText: '倒序',
+                    onClick: () => { // 绑定事件，使用箭头函数以免创建函数作用域
+                        this.goods.reverse()
+                    },
+                    // 自定义指令
+                    directives: [],
+                    // 其他属性
+                    key: 'btnReverse',
+                    ref: 'btnReverse'
+                }),
+                h('table', {
+                    // style用于绑定样式，同v-bind:style的绑定方式
+                    style: {
+                        width: '400px',
+                        textAlign: 'left',
+                        lineHeight: '42px',
+                        border: '1px solid #eee',
+                        userSelect: 'none'
+                    }
+                }, [
+                    h('tr', [
+                        this.fields.map(field => h('th', field.prop))
+                    ]),
+                    this.goods.map(item => h('tr', {
+                        style: {
+                            color: item.isMarked ? '#ea4335' : ''
+                        }
+                    }, this.fields.map(field => h('td', {
+                        style: {
+                            borderTop: '1px solid #eee'
+                        }
+                    }, [
+                        field.prop !== 'operate' // 如果不是操作列，显示文本
+                            ? h('span', item[field.prop])
+                            : h('button', { // 否则显示按钮
+                                class: ['btn', 'btn-text'],
+                                innerHTML: `<span>切换标记</span>`,
+                                onClick: () => { // 当按钮被点击时，切换该行文本标记状态
+                                    item.isMarked = !item.isMarked
+                                }
+                            })
+                    ]))))
+                ])
+            ])
+        }
+    });
+    app.mount('#app');
+</script>
+</body>
+</html>
