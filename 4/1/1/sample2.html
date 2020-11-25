@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{ title }}</h2>
+    <p>{{ profile }}</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                title: 'A Vue App'
+            }
+        },
+        created () {
+            Object.assign(this.$data, {
+                profile: 'This is a Vue App'
+            });
+            console.log(this.$data);
+        }
+    };
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
