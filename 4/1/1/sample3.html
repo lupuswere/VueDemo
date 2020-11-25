@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{ title }}</h2>
+    <p>{{ obj.profile }}</p>
+    <button @click="toggle">toggle</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = {
+        data () {
+            return {
+                title: 'A Vue App',
+                obj: {} // $set 不能用于根节点data上
+            }
+        },
+        created () {
+            Object.assign(this.obj, {
+                profile: 'This is a Vue App.'
+            });
+            console.log('created', this.obj);
+        },
+        mounted () {
+            Object.assign(this.obj, {
+                profile: 'This is a Vue Test App.'
+            });
+            console.log('mounted', this.obj);
+        },
+        methods: {
+            toggle () {
+                Object.assign(this.obj, {
+                    profile: 'This is a Vue App for test.'
+                });
+                console.log('toggle', this.obj);
+            }
+        }
+    };
+    Vue.createApp(app).mount('#app');
+</script>
+</body>
+</html>
