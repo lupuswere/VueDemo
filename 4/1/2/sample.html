@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <color-text text="Hello World"></color-text>
+    <br>
+    <color-text></color-text>
+    <br>
+    <color-text color="#f78" text="Hello World"></color-text>
+    <br>
+    <color-text color="#43dt" text="Hello World"></color-text>
+    <br>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+    const app = Vue.createApp({});
+    app.component('color-text', {
+        props: {
+            text: String,
+            color: {
+                type: String,
+                default: '#000', // 默认值黑色
+                required: true,
+                validator (value) { // 校验规则，判断颜色值是否合法
+                    return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(value)
+                }
+            }
+        },
+        template: `<span :style="{ color: color }">{{ text }}</span>`
+    })
+    app.mount('#app');
+</script>
+</body>
+</html>
