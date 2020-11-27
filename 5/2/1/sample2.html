@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--引入动画库-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<!--animated标识要执行动画的元素，bounce标识所要执行的动画效果，此处为弹簧效果-->
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<style>
+    .inline-block {
+        display: inline-block;
+    }
+    .rotate-enter-active {
+        animation: selfRotateIn 1s;
+    }
+    .rotate-leave-active {
+        animation: selfRotateOut 1s;
+    }
+    /*命名避免与Animate.css冲突*/
+    @keyframes selfRotateIn {
+        0% {
+            opacity: 0;
+            transform: rotateZ(-180deg);
+        }
+        100% {
+            opacity: 1;
+            transform: rotateZ(0deg);
+        }
+    }
+    @keyframes selfRotateOut {
+        0% {
+            opacity: 1;
+            transform: rotateZ(0deg);
+        }
+        100% {
+            opacity: 0;
+            transform: rotateZ(180deg);
+        }
+    }
+</style>
+<div id="app">
+    <button @click="isHidden = !isHidden">
+        {{ isHidden ? '显示' : '隐藏' }}
+    </button>
+    <!--自定义的动画-->
+    <transition name="rotate">
+        <span class="inline-block" v-if="!isHidden">自定义的动画</span>
+    </transition>
+    <!--animate.css的动画-->
+    <transition name="custom" enter-active-class="animated rotateIn" leave-active-class="animated rotatedOut">
+        <span class="inline-block" v-if="!isHidden">animate.css动画</span>
+    </transition>
+</div>
+<script type="text/javascript">
+    Vue.createApp({
+        data () {
+            return {
+                isHidden: true
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
