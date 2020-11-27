@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js"></script>
+<div id="app">
+    <button @click="isHidden = !isHidden">
+        {{ isHidden ? '显示' : '隐藏' }}
+    </button>
+    <transition
+        :before-enter="handleBeforeEnter"
+        :enter="handleEnter"
+        :after-enter="handleAfterEnter"
+        :enter-cancelled="handleEnterCancelled"
+        :before-leave="handleBeforeLeave"
+        :leave="handleLeave"
+        :after-leave="handleAfterLeave"
+        :leave-cancelled="handleLeaveCancelled">
+        <!--过渡元素-->
+    </transition>
+</div>
+<script type="text/javascript">
+    Vue.createApp({
+        data () {
+            return {
+                isHidden: true
+            }
+        },
+        methods: {
+            handleBeforeEnter (el) { },
+            handleEnter (el, done) {
+                done()
+            },
+            handleAfterEnter (el) { },
+            handleEnterCancelled (el) { },
+            handleBeforeLeave (el) { },
+            handleLeave (el, done) { },
+            handleAfterLeave (el) { },
+            handleLeaveCancelled (el) { }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
